@@ -1,0 +1,21 @@
+config:
+    name: 登录日不落系统-获取中心运单列表
+
+teststeps:
+-
+    name: 输入正确的账号密码登录，并获取access_token
+    api: api/login_api.yml
+    extract:
+        - access_token: content.data.access_token          #提取响应数据
+    validate:
+        - eq: ["status_code", 200]
+
+-
+    name: 获取中心运单列表
+    api:  api/get_waybill_list.yml
+    validate:
+        - eq: [ "status_code", 200 ]
+
+
+
+

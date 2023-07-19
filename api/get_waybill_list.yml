@@ -1,0 +1,22 @@
+name: 获取中心运单查询的列表数据
+base_url: ${ENV(UAT_BASE_URL)}
+
+request:
+    url: /basic/manager/waybill/central/page
+    method: POST
+    headers:
+        Content-Type: "application/json"
+        Authorization: $access_token
+    json:
+         queryTimeType: 1
+         time:
+             - "2023-03-07 00:00:00"
+             - "2023-03-07 23:59:59"
+         pageNum: 1
+         pageSize: 10
+validate:
+    - eq: ["status_code", 200]         #相等断言
+    - eq: ["content.success", true]    #包含断言
+
+
+

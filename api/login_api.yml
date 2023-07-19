@@ -1,0 +1,21 @@
+name: 登录日不落系统，并获取token
+variables:
+    username: "880220030"
+    password: "test123456"
+base_url: ${ENV(UAT_BASE_URL)}
+
+
+request:
+    url: /basic/token/login
+    method: POST
+    headers:
+        Content-Type: "application/json"
+    json:
+         userName: $username
+         password: ${myEncrypt($password)}
+validate:
+    - eq: ["status_code", 200]         #相等断言
+    - contains: ["content.data", "access_token"]    #包含断言
+
+
+
